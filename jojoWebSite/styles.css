@@ -140,3 +140,24 @@ h1 {
     max-width: 40rem;
     text-align: left;
 }
+
+.img-container {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+#last-container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 14rem;
+}
+
+#last-container-p {
+    font-size: 1.3rem;
+    width: 60rem;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
