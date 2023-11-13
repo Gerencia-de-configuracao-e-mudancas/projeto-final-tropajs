@@ -3,11 +3,11 @@
     margin: 0;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-style: italic;
-    
-}           
+
+}
 
 .header {
-  
+
     color: white;
     position: fixed;
     width: 100%;
@@ -22,28 +22,30 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    padding: 10px 50px;   
+    padding: 10px 50px;
 
 }
 
 .header nav img {
     width: 5rem;
-    height: 3rem; 
+    height: 3rem;
 }
 
 .header nav ul {
     display: flex;
 }
-.header nav ul li{
+
+.header nav ul li {
     padding: 1rem;
     text-decoration: none;
     list-style: none;
 }
-.header nav ul li a{
+
+.header nav ul li a {
     padding: 1rem;
     text-decoration: none;
     list-style: none;
-    color: white    ;
+    color: white;
 }
 
 .imgDiv {
@@ -52,8 +54,8 @@
     justify-content: center;
     align-items: center;
     gap: 30px;
-    
-   
+
+
     width: 100vw;
     color: white;
     height: 100vh;
@@ -70,7 +72,8 @@
 
 .JojoStyleButton {
     background-color: #f07bae;
-    background: linear-gradient(to bottom, #f07bae, #fff); /* Substitua as cores conforme necessário */
+    background: linear-gradient(to bottom, #f07bae, #fff);
+    /* Substitua as cores conforme necessário */
     border: 1px solid;
     font-size: 1.4rem;
     padding: 10px;
@@ -82,12 +85,13 @@
 .imgDiv button:hover {
     box-shadow: 0px 0px;
 }
+
 .imgDiv img {
     width: 500px;
     height: 300px;
 }
 
-main{
+main {
     background-color: #141414;
     display: flex;
     flex-direction: column;
@@ -109,14 +113,30 @@ h1 {
     filter: drop-shadow(3px 3px black);
 }
 
-.history-div{
+.history-div {
     height: 100%;
 }
+
 .container {
-    padding: 2rem;
-    display: flex ;
-    background-color: gray;
-    height: 100%;
-    width: 100%;
+    padding: 4rem;
+    display: flex;
     justify-content: space-between;
+ 
+    gap: 10.2rem;
+    color: white;
+}
+
+.topic-paragraph {
+    color: #ed2524;
+    font-size: 2.5rem;
+    font-weight: bolder;
+    -webkit-text-stroke: #fff;
+    -webkit-text-stroke-width: 1px; 
+    padding-bottom: 2rem;
+ 
+}
+.content-topic {
+    font-size: 1.3rem;
+    max-width: 40rem;
+    text-align: left;
 }
