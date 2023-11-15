@@ -177,7 +177,7 @@ h1 {
 }
 
 .card-img {
-    width: 20rem;
+    width: 50rem;
     height: 20rem;
 }
 
@@ -234,4 +234,30 @@ h1 {
 
 #about {
     padding: 3rem 0rem;
+}
+
+footer {
+     text-align: center;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background-color: #181818;
+     color: white;
+     height: 10rem;
+}
+
+.about-div{
+    padding: 30px;
+   
+}
+
+.content-about {
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: left;
+    color: white;
+}
+
+#about-sub {
+    padding-bottom: 2rem;
 }
