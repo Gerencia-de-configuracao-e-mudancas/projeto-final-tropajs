@@ -3,6 +3,7 @@
     margin: 0;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-style: italic;
+    scroll-behavior: smooth;
 
 }
 
@@ -151,7 +152,7 @@ h1 {
     justify-content: center;
     display: flex;
     flex-direction: column;
-    padding-bottom: 14rem;
+    padding-bottom: 5rem;
 }
 
 #last-container-p {
@@ -162,6 +163,10 @@ h1 {
     padding: 2rem;
 }
 
+.last-container-img{
+    width: auto;
+    height: auto;
+}
 .card {
     padding: 30px;
     display: flex;
@@ -190,4 +195,43 @@ h1 {
     text-align: center;
     color: white;
     padding: 2rem;
+}
+
+#home, #historia, #temporadas, #jogo, #sobre {
+    scroll-margin-top: 5rem;
+}
+
+#game-title {
+    padding: 4rem 0rem;
+}
+
+.game-div {
+    display: flex;
+    text-align: left;
+    align-items: center;
+    background-color: #181818;
+    padding: 30px;
+}
+
+.content-game {
+    font-size: 1.3rem;
+    width: 50rem;
+    text-align: left;
+    color: white;
+}
+
+#game-name {
+    padding-bottom: 1rem;
+}
+
+#button-game{
+    margin-top: 2rem;
+}
+
+#button-game:hover {
+    box-shadow: 0px 0px;
+}
+
+#about {
+    padding: 3rem 0rem;
 }
