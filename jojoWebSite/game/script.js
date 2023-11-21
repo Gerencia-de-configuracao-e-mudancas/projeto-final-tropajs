@@ -7,6 +7,7 @@ canvas.height = 576;
 c.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.2;
+
 class Personagem {
     constructor({ position, velocity, keys, color }) {
         this.position = position;
@@ -26,11 +27,13 @@ class Personagem {
             height: 50
         }
         this.speed = 10;
-        this.side
+        this.side;
+        this.life = 100;
+        this.canAttack = true;
     }
 
     draw() {
-        c.fillStyle = (this.side == 'right') ? this.color : 'yellow';
+        c.fillStyle = this.color;
         c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
 
@@ -85,6 +88,7 @@ class Personagem {
         setTimeout(() => {
             this.isAttacking = false;
             this.canMove = true;
+            this.canAttack = true;
         }, 1000);
     }
 
@@ -101,10 +105,14 @@ class Personagem {
 
 function colision() {
     if (showColision(player, enemy) && player.isAttacking) {
-        console.log(' player acertou');
+        player.isAttacking = false;
+        enemy.life -= 10;
+        document.querySelector('#enemy-bar').style.width = enemy.life + "%";
     }
     if (showColision(enemy, player) && enemy.isAttacking) {
-        console.log(' enemy acertou');
+        enemy.isAttacking = false;
+        player.life -= 10;
+        document.querySelector('#player-bar').style.width = player.life + "%";
     }
 }
 
@@ -174,7 +182,10 @@ function movement(e, isKeyDown) {
             break;
         case " ":
             player.keys.space.pressed = (isKeyDown) ? true : false;
-            player.attack();
+            if(player.canAttack) {
+                player.canAttack = false;
+                player.attack();
+            }
             break;
 
         case "ArrowLeft":
@@ -187,7 +198,10 @@ function movement(e, isKeyDown) {
             break;
         case "ArrowDown":
             enemy.keys.ArrowDown.pressed = (isKeyDown) ? true : false;
-            enemy.attack();
+            if (enemy.canAttack) {
+                enemy.canAttack = false;
+                enemy.attack();
+            }
             break;
     }
 }
@@ -202,7 +216,7 @@ window.addEventListener("keyup", (e) => {
 
 
 function animate() {
-   // setTimeout(function () {
+   //setTimeout(function () {
         window.requestAnimationFrame(animate);
         c.fillStyle = 'black';
         c.fillRect(0, 0, canvas.width, canvas.height);

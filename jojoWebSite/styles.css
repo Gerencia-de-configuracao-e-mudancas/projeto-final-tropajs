@@ -4,7 +4,7 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-style: italic;
     scroll-behavior: smooth;
-
+    box-sizing: border-box;
 }
 
 .header {
@@ -278,4 +278,63 @@ footer {
 
 #about-sub {
     padding-bottom: 2rem;
+}
+
+/* css do jogo */
+
+.canvas-div {
+    padding-top: 4rem;
+    position: relative;
+    color: blue;
+    
+}
+
+.interface-div {
+    
+    position: absolute;
+    display: flex;
+    
+    width: 100%;
+    align-items: center;
+    padding: 30px;
+}
+
+#player-bar-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border: 5px solid yellow;
+    background-color: transparent;
+    height: 40px;
+    width: 100%;
+}
+
+#player-bar {
+    background-color: purple;
+    height: 33px;
+    width: 100%;
+}
+
+#timer {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+#enemy-bar-container {
+    display: flex;
+    flex-direction: left;
+    align-items: center;
+    border: 5px solid yellow;
+    background-color: transparent;
+    height: 40px;
+    width: 100%;
+}
+
+#enemy-bar {
+    
+    background-color: purple;
+    height: 33px;
+    width: 100%;
 }
