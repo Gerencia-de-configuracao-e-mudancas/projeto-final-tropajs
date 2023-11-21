@@ -8,10 +8,11 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.2;
 class Personagem {
-    constructor({ position, velocity, keys }) {
+    constructor({ position, velocity, keys, color }) {
         this.position = position;
         this.velocity = velocity;
         this.keys = keys;
+        this.color = color;
         this.width = 50;
         this.height = 150;
         this.image = new Image();
@@ -25,17 +26,23 @@ class Personagem {
             height: 50
         }
         this.speed = 10;
+        this.side
     }
 
     draw() {
-        c.fillStyle = 'red';
+        c.fillStyle = (this.side == 'right') ? this.color : 'yellow';
         c.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+
 
         // Ataque 
         if (this.isAttacking) {
             c.fillStyle = 'green';
-            c.fillRect(this.attackBox.position.x,this.attackBox.position.y, this.attackBox.width, this.attackBox.height )
-    
+            this.attackBox.position = { ...this.position };
+            this.attackBox.position.x = (this.side === 'right') ? this.position.x : this.attackBox.position.x - 50;
+            c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
+
+
         }
 
     }
@@ -45,8 +52,13 @@ class Personagem {
         this.movement();
         colision();
 
+
+        this.checkBorder();
+
         this.position.y += this.velocity.y;
         this.position.x += this.velocity.x;
+
+
 
         if (this.position.y + this.height + this.velocity.y >= canvas.height) {
             this.velocity.y = 0;
@@ -56,32 +68,44 @@ class Personagem {
     movement() {
         this.velocity.x = 0;
         if (this.canMove) {
-            if (this.keys.a.pressed && this.lastKey == 'a') {
-            this.velocity.x = -this.speed;
-        } else if (this.keys.d.pressed && this.lastKey == 'd') {
-            this.velocity.x = this.speed;
+            if ((this.keys.a?.pressed || this.keys.ArrowLeft?.pressed) && (this.lastKey == 'a' || this.lastKey == "ArrowLeft")) {
+                this.side = 'left';
+                this.velocity.x = -this.speed;
+            } else if ((this.keys.d?.pressed || this.keys.ArrowRight?.pressed) && (this.lastKey == 'd' || this.lastKey == "ArrowRight")) {
+                this.side = 'right';
+                this.velocity.x = this.speed;
+            }
         }
-        }
-        
+
     }
 
     attack() {
         this.isAttacking = true;
         this.canMove = false;
         setTimeout(() => {
-            this.isAttacking = false; 
-            this.canMove = true;   
+            this.isAttacking = false;
+            this.canMove = true;
         }, 1000);
     }
 
-    
+    checkBorder() {
+        if (this.position.x + this.velocity.x <= 0) {
+            this.velocity.x = 0;
+        } else if (this.position.x + this.velocity.x >= 980) {
+            this.velocity.x = 0;
+        }
+    }
+
+
 }
 
 function colision() {
-
-        if (showColision(player, enemy) && player.isAttacking) {
-             console.log('acertou');
-        } 
+    if (showColision(player, enemy) && player.isAttacking) {
+        console.log(' player acertou');
+    }
+    if (showColision(enemy, player) && enemy.isAttacking) {
+        console.log(' enemy acertou');
+    }
 }
 
 function showColision(player1, player2) {
@@ -92,8 +116,8 @@ function showColision(player1, player2) {
 
 const player = new Personagem({
     position: {
-        x: 0,
-        y: 0
+        x: 100,
+        y: 400
     },
     velocity: {
         x: 0,
@@ -109,26 +133,31 @@ const player = new Personagem({
         space: {
             pressed: false
         }
-    }
+    },
+    color: 'purple'
 });
 
 const enemy = new Personagem({
     position: {
-        x: 400,
-        y: 100
+        x: 850,
+        y: 400
     },
     velocity: {
         x: 0,
         y: 0
     },
     keys: {
-        a: {
+        ArrowLeft: {
             pressed: false
         },
-        d: {
+        ArrowRight: {
+            pressed: false
+        },
+        ArrowDown: {
             pressed: false
         }
-    }
+    },
+    color: 'green'
 });
 
 
@@ -143,9 +172,22 @@ function movement(e, isKeyDown) {
             player.keys.a.pressed = (isKeyDown) ? true : false;
             if (isKeyDown) player.lastKey = 'a';
             break;
-        case " ": 
+        case " ":
             player.keys.space.pressed = (isKeyDown) ? true : false;
             player.attack();
+            break;
+
+        case "ArrowLeft":
+            enemy.keys.ArrowLeft.pressed = (isKeyDown) ? true : false;
+            if (isKeyDown) enemy.lastKey = 'ArrowLeft';
+            break;
+        case "ArrowRight":
+            enemy.keys.ArrowRight.pressed = (isKeyDown) ? true : false;
+            if (isKeyDown) enemy.lastKey = 'ArrowRight';
+            break;
+        case "ArrowDown":
+            enemy.keys.ArrowDown.pressed = (isKeyDown) ? true : false;
+            enemy.attack();
             break;
     }
 }
@@ -160,14 +202,17 @@ window.addEventListener("keyup", (e) => {
 
 
 function animate() {
-    window.requestAnimationFrame(animate);
-    c.fillStyle = 'black';
-    c.fillRect(0, 0, canvas.width, canvas.height);
-    player.update();
-    enemy.update();
+   // setTimeout(function () {
+        window.requestAnimationFrame(animate);
+        c.fillStyle = 'black';
+        c.fillRect(0, 0, canvas.width, canvas.height);
+        player.update();
+        enemy.update();
+  //  }, 1000 / 30);
+
 
 
 }
 
-animate();
+animate()
 console.log(player);
