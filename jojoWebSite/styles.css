@@ -316,15 +316,19 @@ footer {
 }
 
 #timer {
-    background-color: red;
+    background-color: white;
     width: 100px;
     height: 100px;
     flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
 }
 
 #enemy-bar-container {
     display: flex;
-    flex-direction: left;
+   
     align-items: center;
     border: 5px solid yellow;
     background-color: transparent;
@@ -337,4 +341,16 @@ footer {
     background-color: purple;
     height: 33px;
     width: 100%;
+}
+
+#battle-result {
+    display: none;
+    position: absolute;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

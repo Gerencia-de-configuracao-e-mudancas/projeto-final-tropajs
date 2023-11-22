@@ -8,100 +8,8 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.2;
 
-class Personagem {
-    constructor({ position, velocity, keys, color }) {
-        this.position = position;
-        this.velocity = velocity;
-        this.keys = keys;
-        this.color = color;
-        this.width = 50;
-        this.height = 150;
-        this.image = new Image();
-        this.image.src = "../img/sprites/jotaroStopped.gif";
-        this.lastKey;
-        this.isAttacking;
-        this.canMove = true;
-        this.attackBox = {
-            position: this.position,
-            width: 100,
-            height: 50
-        }
-        this.speed = 10;
-        this.side;
-        this.life = 100;
-        this.canAttack = true;
-    }
-
-    draw() {
-        c.fillStyle = this.color;
-        c.fillRect(this.position.x, this.position.y, this.width, this.height);
-
-
-
-        // Ataque 
-        if (this.isAttacking) {
-            c.fillStyle = 'green';
-            this.attackBox.position = { ...this.position };
-            this.attackBox.position.x = (this.side === 'right') ? this.position.x : this.attackBox.position.x - 50;
-            c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-
-
-        }
-
-    }
-
-    update() {
-        this.draw();
-        this.movement();
-        colision();
-
-
-        this.checkBorder();
-
-        this.position.y += this.velocity.y;
-        this.position.x += this.velocity.x;
-
-
-
-        if (this.position.y + this.height + this.velocity.y >= canvas.height) {
-            this.velocity.y = 0;
-        } else this.velocity.y += gravity;
-    }
-
-    movement() {
-        this.velocity.x = 0;
-        if (this.canMove) {
-            if ((this.keys.a?.pressed || this.keys.ArrowLeft?.pressed) && (this.lastKey == 'a' || this.lastKey == "ArrowLeft")) {
-                this.side = 'left';
-                this.velocity.x = -this.speed;
-            } else if ((this.keys.d?.pressed || this.keys.ArrowRight?.pressed) && (this.lastKey == 'd' || this.lastKey == "ArrowRight")) {
-                this.side = 'right';
-                this.velocity.x = this.speed;
-            }
-        }
-
-    }
-
-    attack() {
-        this.isAttacking = true;
-        this.canMove = false;
-        setTimeout(() => {
-            this.isAttacking = false;
-            this.canMove = true;
-            this.canAttack = true;
-        }, 1000);
-    }
-
-    checkBorder() {
-        if (this.position.x + this.velocity.x <= 0) {
-            this.velocity.x = 0;
-        } else if (this.position.x + this.velocity.x >= 980) {
-            this.velocity.x = 0;
-        }
-    }
-
-
-}
+const numCenario = Math.floor(Math.random() * 3) + 1 - 1;
+const cenarios = ['../img/sprites/stage-sprite4.jpg', '../img/sprites/stage-sprite.png', '../img/sprites/stage3.png']; 
 
 function colision() {
     if (showColision(player, enemy) && player.isAttacking) {
@@ -117,15 +25,58 @@ function colision() {
 }
 
 function showColision(player1, player2) {
-    let p1Hitbox = player1.attackBox.position.x + player1.attackBox.width;
-    let p2Hitbox = player2.position.x + player2.width;
-    return (p1Hitbox >= player2.position.x && player1.position.x <= p2Hitbox)
+    let p1HitboxX = player1.attackBox.position.x;
+    let p1HitboxXEnd = player1.attackBox.width + p1HitboxX;
+    let p2HitboxX = player2.position.x;
+    let p2HitboxXEnd = player2.width + p2HitboxX;
+
+    let p1HitboxY = player1.attackBox.position.y + player1.attackBox.height;
+    let p2HitboxY = player2.position.y + player2.height;
+
+    console.log(p1HitboxX, p1HitboxXEnd, p2HitboxX, p2HitboxXEnd);
+    return (
+        p1HitboxX <= p2HitboxXEnd && p1HitboxXEnd >= p2HitboxX
+        &&
+        p1HitboxY >= player2.position.y &&
+        player1.position.y <= p2HitboxY
+    );
 }
+
+function checkSide() {
+    if (player.position.x < enemy.position.x) {
+        player.side = 'right';
+        enemy.side = 'left';
+    } else {
+        player.side = 'left';
+        enemy.side = 'right';
+    }
+}
+
+function checkWinner ({player, enemy, timer}){
+    document.querySelector("#battle-result").style.display = "flex";
+    clearTimeout(timer);
+    if (player.life == enemy.life) {
+        document.querySelector("#battle-result").textContent = "Empate";
+    } else if(player.life > enemy.life){
+        document.querySelector("#battle-result").textContent = "Jogador 1 ganha";
+    } else if(player.life < enemy.life) {
+        document.querySelector("#battle-result").textContent = "Jogador 2 ganha";
+
+    }
+}
+
+const back = new Background ({
+    position: {
+        x:0,
+        y:0
+    },
+    imgSrc: cenarios[numCenario]
+})
 
 const player = new Personagem({
     position: {
         x: 100,
-        y: 400
+        y: 300
     },
     velocity: {
         x: 0,
@@ -142,13 +93,14 @@ const player = new Personagem({
             pressed: false
         }
     },
-    color: 'purple'
+    color: 'purple',
+    side: 'right'
 });
 
 const enemy = new Personagem({
     position: {
         x: 850,
-        y: 400
+        y: 300
     },
     velocity: {
         x: 0,
@@ -165,7 +117,8 @@ const enemy = new Personagem({
             pressed: false
         }
     },
-    color: 'green'
+    color: 'green',
+    side: 'left'
 });
 
 
@@ -182,7 +135,7 @@ function movement(e, isKeyDown) {
             break;
         case " ":
             player.keys.space.pressed = (isKeyDown) ? true : false;
-            if(player.canAttack) {
+            if (player.canAttack) {
                 player.canAttack = false;
                 player.attack();
             }
@@ -214,15 +167,37 @@ window.addEventListener("keyup", (e) => {
     movement(e, false);
 });
 
+let time = 20;
+let timer;
+function decreaseTime() {
+    if (time > 0) {
+        timer = setTimeout(decreaseTime, 1000);
+        time--;
+        document.querySelector("#timer").textContent = time;
+    } else {
+        checkWinner({player, enemy, timer});
+    }
+
+
+}
+
+decreaseTime();
+
 
 function animate() {
-   //setTimeout(function () {
-        window.requestAnimationFrame(animate);
-        c.fillStyle = 'black';
-        c.fillRect(0, 0, canvas.width, canvas.height);
-        player.update();
-        enemy.update();
-  //  }, 1000 / 30);
+    //setTimeout(function () {
+    window.requestAnimationFrame(animate);
+    c.fillStyle = 'black';
+    c.fillRect(0, 0, canvas.width, canvas.height);
+    back.update();
+    player.update();
+    enemy.update();
+
+
+    if(player.life <= 0 || enemy.life <= 0 ){
+        checkWinner({player,enemy, timer});
+    }
+    //  }, 1000 / 30);
 
 
 
