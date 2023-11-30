@@ -166,3 +166,14 @@ header {
 #informacoes-hero img {
   width: 35%;
 }
+
+/* Informações */
+.info {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  padding: 3rem;
+  justify-content: center;
+  align-items: center;
+  background: #090a0a;
+}
