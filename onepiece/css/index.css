@@ -17,7 +17,23 @@ body {
   background: #000;
 }
 
+@font-face {
+  font-family: "ONE-PIECE";
+  src: url("../fonts/ONE-PIECE.ttf.woff") format("woff"),
+    url("../fonts/ONE-PIECE.ttf.svg#ONE-PIECE") format("svg"),
+    url("../fonts/ONE-PIECE.ttf.eot"),
+    url("../fonts/ONE-PIECE.ttf.eot?#iefix") format("embedded-opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Utilitários */
+.titulos {
+  font-family: "ONE-PIECE", sans-serif;
+  font-size: 3rem;
+  color: #d60000;
+}
+
 .textos {
   font-size: 1.2rem;
   color: #fff;
@@ -110,4 +126,43 @@ header {
 
 .cta:active {
   transform: scale(0.95);
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  width: 100%;
+  height: 80vh;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(-233deg, #001 40%, rgba(0, 0, 0, 0) 65%) no-repeat;
+}
+
+.hero::after {
+  content: "";
+  background: url(../img/personagem-monkey-d-luffy.png) no-repeat center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-size: cover;
+}
+
+#informacoes-hero {
+  z-index: 9999;
+  padding: 2rem;
+}
+
+#informacoes-hero img {
+  width: 35%;
 }
