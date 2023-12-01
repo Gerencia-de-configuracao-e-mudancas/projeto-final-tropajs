@@ -456,3 +456,104 @@ header {
   font-size: 1.5 rem;
   border-radius: 50%;
 }
+
+/* Responsividade telas maiores */
+@media (max-width: 1870px) {
+  .slide-personagens {
+    width: 85%;
+  }
+}
+
+@media (max-width: 1770px) {
+  .slide-personagens {
+    width: 90%;
+  }
+
+  .imagem-bandeira {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+@media (max-width: 1670px) {
+  .slide-personagens {
+    width: 74%;
+  }
+  .card {
+    width: 15.5rem;
+    height: 27rem;
+  }
+
+  .texto-card {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 1570px) {
+  .slide-personagens {
+    width: 70%;
+  }
+  .card {
+    width: 14rem;
+    height: 24rem;
+  }
+
+  .texto-card {
+    font-size: 0.7rem;
+  }
+}
+
+
+@media (max-width: 1440px) {
+  .slide-personagens {
+    width: 70%;
+  }
+
+  /* Utilitários */
+  .titulos {
+    font-size: 2.5rem;
+  }
+
+  .textos {
+    font-size: 1rem;
+  }
+
+  /* Informações */
+  .info {
+    padding: 2rem;
+  }
+
+  /* Personagens */
+  .imagem-bandeira {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .card {
+    width: 12rem;
+    height: 20.5rem;
+  }
+
+  .texto-card {
+    font-size: 0.6rem;
+  }
+
+  .flip-button {
+    position: absolute;
+    cursor: pointer;
+    padding: 0.2rem;
+    z-index: 1;
+    background-color: #d60000;
+    color: #fff;
+    font-size: 0.4rem;
+  }
+
+  .flip-button i {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+}
