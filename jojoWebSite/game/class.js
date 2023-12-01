@@ -21,7 +21,7 @@ class Personagem {
         this.velocity = velocity;
         this.keys = keys;
         this.color = color;
-        this.width = 50;
+        this.width = 60;
         this.height = 150;
         this.image = new Image();
         this.imageSrc = imageSrc
@@ -72,11 +72,9 @@ class Personagem {
     draw() {
         if (this.life > 0) {
             c.save();
-
+    
             if (this.side === 'left') {
-
                 c.scale(-1, 1);
-
                 const invertedX = -this.position.x - this.width;
                 c.drawImage(
                     this.image,
@@ -89,10 +87,7 @@ class Personagem {
                     (this.image.width / this.framesMax) * this.scale,
                     this.image.height * this.scale
                 );
-                c.fillStyle = 'red';
-                c.fillRect(this.position.x, this.position.y, this.width, this.height)
             } else {
-
                 c.drawImage(
                     this.image,
                     this.framesCurrent * (this.image.width / this.framesMax),
@@ -103,33 +98,31 @@ class Personagem {
                     this.position.y - this.offset.y,
                     (this.image.width / this.framesMax) * this.scale,
                     this.image.height * this.scale
-                )
-                c.fillStyle = 'red';
-                c.fillRect(this.position.x, this.position.y, this.width, this.height)
-
-                //     }
-
-                //     // Restaura o estado do contexto
-                //     c.restore();
+                );
             }
+             
+    
+            // Restaura o estado do contexto
             c.restore();
-            c.fillStyle = 'red';
-            c.fillRect(this.position.x, this.position.y, this.width, this.height)
-
-
+    
+            // c.fillStyle = 'red';
+            // c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+    
             // Ataque 
             if (this.isAttackingAnimation) {
-                
                 c.save();
-
+    
                 let attackimg = new Image();
-                attackimg.src = this.sprites.attack.imageSrc
-                
-                 if (this.side === 'left') {
-                    this.attackBox.position.x = this.position.x - this.AttackBoxoffset.x;
-                     c.scale(-1, 1);
-                     const invertedX = -this.position.x - this.width;
-                     c.drawImage(
+                attackimg.src = this.sprites.attack.imageSrc;
+    
+                if (this.side === 'left') {
+                    const invertedX = -this.position.x - this.width;
+                    this.attackBox.position = {
+                        x: invertedX - this.AttackBoxoffset.x,
+                        y: this.position.y - this.AttackBoxoffset.y
+                    };
+                    c.scale(-1, 1);
+                    c.drawImage(
                         attackimg,
                         this.framesCurrentAttack * (attackimg.width / this.sprites.attack.framesMax),
                         0,
@@ -139,12 +132,12 @@ class Personagem {
                         this.position.y - 90,
                         (attackimg.width / this.sprites.attack.framesMax) * this.scale,
                         attackimg.height * this.scale
-                    )
-                    c.fillStyle = 'red';
-                    this.attackBox.position.x = this.position.x - this.AttackBoxoffset.x;
-                    c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-                    
+                    );
                 } else {
+                    this.attackBox.position = {
+                        x: this.position.x - this.AttackBoxoffset.x,
+                        y: this.position.y - this.AttackBoxoffset.y
+                    };
                     c.drawImage(
                         attackimg,
                         this.framesCurrentAttack * (attackimg.width / this.sprites.attack.framesMax),
@@ -155,20 +148,15 @@ class Personagem {
                         this.position.y - 90,
                         (attackimg.width / this.sprites.attack.framesMax) * this.scale,
                         attackimg.height * this.scale
-                    )
-                    c.fillStyle = 'red';
-                    this.attackBox.position.x = this.position.x - this.AttackBoxoffset.x;
-                    c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-
-                 }
-                 
-                 c.restore();
-
-                // this.animateFramesAttack();
+                    );
+                }
+    
+                
+                c.restore();
             }
-
         }
     }
+    
 
     switchSprite(){
         switch(this.currentSprite){
@@ -214,7 +202,7 @@ class Personagem {
 
 
     update() {
-      
+        
         this.draw();
         this.animateFrames();
         this.switchSprite();

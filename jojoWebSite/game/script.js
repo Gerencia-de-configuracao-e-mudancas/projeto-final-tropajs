@@ -7,39 +7,76 @@ canvas.height = 576;
 c.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.2;
-const cenarios = ['../img/sprites/stage3.png']; 
+const cenarios = ['../img/sprites/stage3.png'];
 const numCenario = Math.floor(Math.random() * cenarios.length) + 1 - 1;
 
 
 function colision() {
-    if (showColision(player, enemy) && player.isAttacking) {
+
+    if (checkColision(player, enemy) && player.isAttacking) {
         player.isAttacking = false;
         enemy.life -= 20;
+
+        doknockBack(enemy);
+
         document.querySelector('#enemy-bar').style.width = enemy.life + "%";
     }
-    if (showColision(enemy, player) && enemy.isAttacking) {
+    if (checkColision(enemy, player) && enemy.isAttacking) {
         enemy.isAttacking = false;
         player.life -= 20;
+
+        doknockBack(player);
+
+    
         document.querySelector('#player-bar').style.width = player.life + "%";
     }
 }
 
-function showColision(player1, player2) {
-    let p1HitboxX = player1.attackBox.position.x;
-    let p1HitboxXEnd = player1.attackBox.width + p1HitboxX;
-    let p2HitboxX = player2.position.x;
-    let p2HitboxXEnd = player2.width + p2HitboxX;
+function checkColision(attacker, target) {
+    let attackerHitboxX = attacker.attackBox.position.x;
+    let attackerHitboxXEnd = attacker.attackBox.width + attackerHitboxX;
+    let targetHitboxX = target.position.x;
+    let targetHitboxXEnd = target.width + targetHitboxX;
 
-    let p1HitboxY = player1.attackBox.position.y + player1.attackBox.height;
-    let p2HitboxY = player2.position.y + player2.height;
 
-    //console.log(p1HitboxX, p1HitboxXEnd, p2HitboxX, p2HitboxXEnd);
-    return (
-        p1HitboxX <= p2HitboxXEnd && p1HitboxXEnd >= p2HitboxX
-        &&
-        p1HitboxY >= player2.position.y &&
-        player1.position.y <= p2HitboxY
-    );
+    let attackerHitboxY = attacker.attackBox.position.y + attacker.attackBox.height;
+    let targetHitboxY = target.position.y + target.height;
+    if (attacker.side === "right") {
+        return (
+
+            attackerHitboxXEnd >= targetHitboxX &&
+            attackerHitboxY >= target.position.y &&
+            attacker.position.y <= targetHitboxY
+        );
+    } else {
+
+        attackerHitboxX *= -1;
+        attackerHitboxXEnd = attacker.attackBox.width + attackerHitboxX;
+
+        return (
+            attackerHitboxX - 100 <= targetHitboxXEnd &&
+            attackerHitboxXEnd >= targetHitboxX &&
+            attackerHitboxY >= target.position.y &&
+            attacker.position.y <= targetHitboxY
+        )
+    }
+
+}
+
+function doknockBack(object) {
+    object.canMove = false;
+    object.canAttack = false;
+    let knockback = 0;
+    if(object.position.x + 20 <= 965 && object.position.x -20 >= 10) {
+        knockback = (object.side === 'left') ? +30 : -30; 
+    }
+    
+    let a = setInterval(object.position.x += knockback, 200);
+    setTimeout(() => {
+        clearInterval(a);
+        object.canMove = true;
+        object.canAttack = true;
+    }, 1000);
 }
 
 function checkSide() {
@@ -52,12 +89,12 @@ function checkSide() {
     }
 }
 
-function checkWinner ({player, enemy, timer}){
+function checkWinner({ player, enemy, timer }) {
     document.querySelector("#battle-result").style.display = "flex";
     clearTimeout(timer);
     if (player.life == enemy.life) {
         document.querySelector("#battle-result").textContent = "Empate";
-    } else if(player.life > enemy.life){
+    } else if (player.life > enemy.life) {
         enemy.life = 0;
         enemy.canAttack = false;
         enemy.canMove = false;
@@ -65,7 +102,7 @@ function checkWinner ({player, enemy, timer}){
         player.canMove = false;
         player.win = true;
         document.querySelector("#battle-result").textContent = "Jogador 1 ganha";
-    } else if(player.life < enemy.life) {
+    } else if (player.life < enemy.life) {
         player.life = 0;
         player.canAttack = false;
         player.canMove = false;
@@ -77,10 +114,10 @@ function checkWinner ({player, enemy, timer}){
     }
 }
 
-const back = new Background ({
+const back = new Background({
     position: {
-        x:0,
-        y:0
+        x: 0,
+        y: 0
     },
     imgSrc: cenarios[numCenario]
 })
@@ -111,28 +148,28 @@ const player = new Personagem({
     framesMax: 23,
     scale: 2,
     offset: {
-        x:0,
-        y:50
+        x: 45,
+        y: 50
     },
     AttackBoxoffset: {
-        x:-150,
-        y:0
+        x: -150,
+        y: 0
     },
     sprites: {
         idle: {
-            imageSrc:'../img/sprites/jotaro_idle.png',
+            imageSrc: '../img/sprites/jotaro_idle.png',
             framesMax: 23
         },
         run: {
-            imageSrc:'../img/sprites/jotaro_walking.png',
+            imageSrc: '../img/sprites/jotaro_walking.png',
             framesMax: 16
         },
-        attack:{
-            imageSrc:'../img/sprites/jotaro_attack.png',
+        attack: {
+            imageSrc: '../img/sprites/jotaro_attack.png',
             framesMax: 24
         },
         win: {
-            imageSrc:'../img/sprites/jotaro_win.png',
+            imageSrc: '../img/sprites/jotaro_win.png',
             framesMax: 11
         }
     }
@@ -165,28 +202,28 @@ const enemy = new Personagem({
     framesMax: 6,
     scale: 2,
     offset: {
-        x:40,
-        y:50
+        x: 40,
+        y: 50
     },
     AttackBoxoffset: {
-        x:-150,
-        y:0
+        x: -150,
+        y: 0
     },
     sprites: {
         idle: {
-            imageSrc:'../img/sprites/dio_idle.png',
+            imageSrc: '../img/sprites/dio_idle.png',
             framesMax: 6
         },
         run: {
-            imageSrc:'../img/sprites/dio_walking.png',
+            imageSrc: '../img/sprites/dio_walking.png',
             framesMax: 16
         },
-        attack:{
-            imageSrc:'../img/sprites/dio_attacking.png',
+        attack: {
+            imageSrc: '../img/sprites/dio_attacking.png',
             framesMax: 18
         },
         win: {
-            imageSrc:'../img/sprites/dio_win.png',
+            imageSrc: '../img/sprites/dio_win.png',
             framesMax: 2
         }
     }
@@ -246,7 +283,7 @@ function decreaseTime() {
         time--;
         document.querySelector("#timer-content").textContent = time;
     } else {
-        checkWinner({player, enemy, timer});
+        checkWinner({ player, enemy, timer });
     }
 
 
@@ -255,22 +292,22 @@ function decreaseTime() {
 
 
 function animate() {
-   // setTimeout(function () {
+    // setTimeout(function () {
     window.requestAnimationFrame(animate);
     c.fillStyle = 'black';
     c.fillRect(0, 0, canvas.width, canvas.height);
     back.update();
-   
+
     player.update();
     enemy.update();
 
 
-     
 
-    if(player.life <= 0 || enemy.life <= 0 ){
-        checkWinner({player,enemy, timer});
+
+    if (player.life <= 0 || enemy.life <= 0) {
+        checkWinner({ player, enemy, timer });
     }
-      //}, 1000 / 30);
+    //}, 1000 / 30);
 
 
 
@@ -300,7 +337,7 @@ function countdown() {
             showLifeBar();
             animate();
             decreaseTime();
-           
+
         }, 1000);
     }
 }
