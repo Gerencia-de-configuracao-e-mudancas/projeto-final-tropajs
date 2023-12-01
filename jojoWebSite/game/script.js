@@ -7,19 +7,19 @@ canvas.height = 576;
 c.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.2;
+const cenarios = ['../img/sprites/stage3.png']; 
+const numCenario = Math.floor(Math.random() * cenarios.length) + 1 - 1;
 
-const numCenario = Math.floor(Math.random() * 3) + 1 - 1;
-const cenarios = ['../img/sprites/stage-sprite4.jpg', '../img/sprites/stage-sprite.png', '../img/sprites/stage3.png']; 
 
 function colision() {
     if (showColision(player, enemy) && player.isAttacking) {
         player.isAttacking = false;
-        enemy.life -= 10;
+        enemy.life -= 20;
         document.querySelector('#enemy-bar').style.width = enemy.life + "%";
     }
     if (showColision(enemy, player) && enemy.isAttacking) {
         enemy.isAttacking = false;
-        player.life -= 10;
+        player.life -= 20;
         document.querySelector('#player-bar').style.width = player.life + "%";
     }
 }
@@ -33,7 +33,7 @@ function showColision(player1, player2) {
     let p1HitboxY = player1.attackBox.position.y + player1.attackBox.height;
     let p2HitboxY = player2.position.y + player2.height;
 
-    console.log(p1HitboxX, p1HitboxXEnd, p2HitboxX, p2HitboxXEnd);
+    //console.log(p1HitboxX, p1HitboxXEnd, p2HitboxX, p2HitboxXEnd);
     return (
         p1HitboxX <= p2HitboxXEnd && p1HitboxXEnd >= p2HitboxX
         &&
@@ -58,8 +58,20 @@ function checkWinner ({player, enemy, timer}){
     if (player.life == enemy.life) {
         document.querySelector("#battle-result").textContent = "Empate";
     } else if(player.life > enemy.life){
+        enemy.life = 0;
+        enemy.canAttack = false;
+        enemy.canMove = false;
+        player.canAttack = false;
+        player.canMove = false;
+        player.win = true;
         document.querySelector("#battle-result").textContent = "Jogador 1 ganha";
     } else if(player.life < enemy.life) {
+        player.life = 0;
+        player.canAttack = false;
+        player.canMove = false;
+        enemy.canAttack = false;
+        enemy.canMove = false;
+        enemy.win = true;
         document.querySelector("#battle-result").textContent = "Jogador 2 ganha";
 
     }
@@ -76,7 +88,7 @@ const back = new Background ({
 const player = new Personagem({
     position: {
         x: 100,
-        y: 300
+        y: 340
     },
     velocity: {
         x: 0,
@@ -94,17 +106,47 @@ const player = new Personagem({
         }
     },
     color: 'purple',
-    side: 'right'
+    side: 'right',
+    imageSrc: '../img/sprites/jotaro_idle.png',
+    framesMax: 23,
+    scale: 2,
+    offset: {
+        x:0,
+        y:50
+    },
+    AttackBoxoffset: {
+        x:-150,
+        y:0
+    },
+    sprites: {
+        idle: {
+            imageSrc:'../img/sprites/jotaro_idle.png',
+            framesMax: 23
+        },
+        run: {
+            imageSrc:'../img/sprites/jotaro_walking.png',
+            framesMax: 16
+        },
+        attack:{
+            imageSrc:'../img/sprites/jotaro_attack.png',
+            framesMax: 24
+        },
+        win: {
+            imageSrc:'../img/sprites/jotaro_win.png',
+            framesMax: 11
+        }
+    }
 });
+
 
 const enemy = new Personagem({
     position: {
         x: 850,
-        y: 300
+        y: 340
     },
     velocity: {
         x: 0,
-        y: 0
+        y: 10
     },
     keys: {
         ArrowLeft: {
@@ -118,7 +160,36 @@ const enemy = new Personagem({
         }
     },
     color: 'green',
-    side: 'left'
+    side: 'left',
+    imageSrc: '../img/sprites/dio_idle.png',
+    framesMax: 6,
+    scale: 2,
+    offset: {
+        x:40,
+        y:50
+    },
+    AttackBoxoffset: {
+        x:-150,
+        y:0
+    },
+    sprites: {
+        idle: {
+            imageSrc:'../img/sprites/dio_idle.png',
+            framesMax: 6
+        },
+        run: {
+            imageSrc:'../img/sprites/dio_walking.png',
+            framesMax: 16
+        },
+        attack:{
+            imageSrc:'../img/sprites/dio_attacking.png',
+            framesMax: 18
+        },
+        win: {
+            imageSrc:'../img/sprites/dio_win.png',
+            framesMax: 2
+        }
+    }
 });
 
 
@@ -173,7 +244,7 @@ function decreaseTime() {
     if (time > 0) {
         timer = setTimeout(decreaseTime, 1000);
         time--;
-        document.querySelector("#timer").textContent = time;
+        document.querySelector("#timer-content").textContent = time;
     } else {
         checkWinner({player, enemy, timer});
     }
@@ -181,27 +252,58 @@ function decreaseTime() {
 
 }
 
-decreaseTime();
 
 
 function animate() {
-    //setTimeout(function () {
+   // setTimeout(function () {
     window.requestAnimationFrame(animate);
     c.fillStyle = 'black';
     c.fillRect(0, 0, canvas.width, canvas.height);
     back.update();
+   
     player.update();
     enemy.update();
 
 
+     
+
     if(player.life <= 0 || enemy.life <= 0 ){
         checkWinner({player,enemy, timer});
     }
-    //  }, 1000 / 30);
+      //}, 1000 / 30);
 
 
 
 }
 
-animate()
-console.log(player);
+function showLifeBar() {
+    document.querySelector("#enemy-bar-container").style.display = 'flex';
+    document.querySelector("#timer").style.display = 'flex';
+    document.querySelector("#player-bar-container").style.display = 'flex';
+}
+
+
+
+
+let time_start = 1;
+let timer_start;
+function countdown() {
+    document.querySelector("#battle-result").style.display = 'flex';
+    if (time_start > 0) {
+        document.querySelector("#battle-result").textContent = time_start;
+        time_start--;
+        timer_start = setTimeout(countdown, 1000);
+    } else {
+        document.querySelector("#battle-result").textContent = "Fight!";
+        setTimeout(() => {
+            document.querySelector("#battle-result").textContent = "";
+            showLifeBar();
+            animate();
+            decreaseTime();
+           
+        }, 1000);
+    }
+}
+
+countdown();
+

@@ -300,50 +300,61 @@ footer {
 }
 
 #player-bar-container {
-    display: flex;
+    display: none;
     justify-content: flex-end;
     align-items: center;
-    border: 5px solid yellow;
+    border: 3px solid #f7d62f;
     background-color: transparent;
-    height: 40px;
+    height: 23px;
     width: 100%;
+
 }
 
 #player-bar {
-    background-color: purple;
-    height: 33px;
+    background: linear-gradient(to bottom, #9651c5, #e894f6);
+    height: 17px;
     width: 100%;
 }
 
 #timer {
-    background-color: white;
-    width: 100px;
-    height: 100px;
+    background-color: black;
+    border: 5px solid #f7d62f;
+    width: 80px;
+    height: 80px;
     flex-shrink: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: white;
+    transform: rotate(45deg);
 }
 
+#timer-content {
+    
+    transform: rotate(-45deg); /* Invertendo a rotação para compensar */
+}
+
+
 #enemy-bar-container {
-    display: flex;
+    display: none;
    
     align-items: center;
-    border: 5px solid yellow;
+    border: 3px solid #f7d62f;
     background-color: transparent;
-    height: 40px;
+    height: 23px;
     width: 100%;
 }
 
 #enemy-bar {
     
-    background-color: purple;
-    height: 33px;
+    background: linear-gradient(to bottom, #9651c5, #e894f6);
+    height: 17px;
     width: 100%;
 }
 
 #battle-result {
+    z-index: 100;
+    background-color: red;
     display: none;
     position: absolute;
     color: white;
@@ -353,4 +364,10 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
+    font-size: 2rem;
+    padding: 0px 20px;
+    background: linear-gradient(to bottom, #eb2690, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(3px 3px black);
 }
