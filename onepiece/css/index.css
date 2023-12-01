@@ -425,3 +425,34 @@ header {
   width: 1rem;
   height: 1rem;
 }
+
+/* Footer */
+.footer {
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  padding: 1.5rem;
+  align-items: center;
+}
+
+.footer p {
+  color: #fff;
+  font-size: 1rem;
+  font-family: "poppins", sans-serif;
+}
+
+.footer .icones {
+  padding-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.footer a {
+  color: inherit;
+}
+
+.footer i {
+  background-color: #fff;
+  font-size: 1.5 rem;
+  border-radius: 50%;
+}
