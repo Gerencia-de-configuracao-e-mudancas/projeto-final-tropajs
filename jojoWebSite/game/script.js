@@ -349,7 +349,7 @@ function countdown() {
         time_start--;
         timer_start = setTimeout(countdown, 1000);
     } else {
-        document.querySelector("#result").textContent = "Fight!";
+        document.querySelector("#result").textContent = "FIGHT!";
         setTimeout(() => {
             document.querySelector("#battle-result").style.display = "none";
             showLifeBar();

@@ -206,7 +206,7 @@ h1 {
 .card-content {
     font-size: 1.3rem;
     width: 50rem;
-    text-align: center;
+    text-align: left;
     color: white;
     padding: 2rem;
 }
