@@ -30,6 +30,7 @@ class Personagem {
         this.isAttacking;
         this.isAttackingAnimation;
         this.canMove = true;
+        this.getDamage = false;
         this.attackBox = {
             position: {
                 x: this.position.x - AttackBoxoffset.x,
@@ -175,6 +176,11 @@ class Personagem {
                 this.framesMax = this.sprites.win.framesMax;
                 break;
             }
+            case 'damage': {
+                this.image.src = this.sprites.damage.imageSrc;
+                this.framesMax = this.sprites.damage.framesMax;
+                break;
+            }
         }
     }
 
@@ -213,7 +219,7 @@ class Personagem {
         checkSide();
         this.checkBorder();
 
-        if (this.velocity.x == 0) {
+        if (this.velocity.x == 0 && this.getDamage == false) {
             this.currentSprite = 'idle';
         }
         if (this.win == true) {

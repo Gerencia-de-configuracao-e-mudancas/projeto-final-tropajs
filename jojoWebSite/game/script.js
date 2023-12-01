@@ -67,13 +67,15 @@ function doknockBack(object) {
     object.canMove = false;
     object.canAttack = false;
     let knockback = 0;
-    if(object.position.x + 20 <= 965 && object.position.x -20 >= 10) {
-        knockback = (object.side === 'left') ? +30 : -30; 
+    if(object.position.x + 100 <= 965 && object.position.x -100 >= 10) {
+        knockback = (object.side === 'left') ? +100 : -100; 
     }
-    
+    object.getDamage = true;
+    object.currentSprite = 'damage';
     let a = setInterval(object.position.x += knockback, 200);
     setTimeout(() => {
         clearInterval(a);
+        object.getDamage = false;
         object.canMove = true;
         object.canAttack = true;
     }, 1000);
@@ -93,7 +95,13 @@ function checkWinner({ player, enemy, timer }) {
     document.querySelector("#battle-result").style.display = "flex";
     clearTimeout(timer);
     if (player.life == enemy.life) {
-        document.querySelector("#battle-result").textContent = "Empate";
+        enemy.canAttack = false;
+        enemy.canMove = false;
+        player.canAttack = false;
+        player.canMove = false;
+       
+        document.querySelector("#play-Again").style.display = 'flex';
+        document.querySelector("#result").textContent = "Empate";
     } else if (player.life > enemy.life) {
         enemy.life = 0;
         enemy.canAttack = false;
@@ -101,7 +109,8 @@ function checkWinner({ player, enemy, timer }) {
         player.canAttack = false;
         player.canMove = false;
         player.win = true;
-        document.querySelector("#battle-result").textContent = "Jogador 1 ganha";
+        document.querySelector("#play-Again").style.display = 'flex';
+        document.querySelector("#result").textContent = "Jogador 1 ganha";
     } else if (player.life < enemy.life) {
         player.life = 0;
         player.canAttack = false;
@@ -109,7 +118,8 @@ function checkWinner({ player, enemy, timer }) {
         enemy.canAttack = false;
         enemy.canMove = false;
         enemy.win = true;
-        document.querySelector("#battle-result").textContent = "Jogador 2 ganha";
+        document.querySelector("#play-Again").style.display = 'flex';
+        document.querySelector("#result").textContent = "Jogador 2 ganha";
 
     }
 }
@@ -171,6 +181,10 @@ const player = new Personagem({
         win: {
             imageSrc: '../img/sprites/jotaro_win.png',
             framesMax: 11
+        },
+        damage: {
+            imageSrc: '../img/sprites/jotaro_damaged.png',
+            framesMax: 1
         }
     }
 });
@@ -225,6 +239,10 @@ const enemy = new Personagem({
         win: {
             imageSrc: '../img/sprites/dio_win.png',
             framesMax: 2
+        },
+        damage: {
+            imageSrc: '../img/sprites/dio_damaged.png',
+            framesMax: 1
         }
     }
 });
@@ -275,7 +293,7 @@ window.addEventListener("keyup", (e) => {
     movement(e, false);
 });
 
-let time = 20;
+let time = 60;
 let timer;
 function decreaseTime() {
     if (time > 0) {
@@ -322,18 +340,18 @@ function showLifeBar() {
 
 
 
-let time_start = 1;
+let time_start = 3;
 let timer_start;
 function countdown() {
     document.querySelector("#battle-result").style.display = 'flex';
     if (time_start > 0) {
-        document.querySelector("#battle-result").textContent = time_start;
+        document.querySelector("#result").textContent = time_start;
         time_start--;
         timer_start = setTimeout(countdown, 1000);
     } else {
-        document.querySelector("#battle-result").textContent = "Fight!";
+        document.querySelector("#result").textContent = "Fight!";
         setTimeout(() => {
-            document.querySelector("#battle-result").textContent = "";
+            document.querySelector("#battle-result").style.display = "none";
             showLifeBar();
             animate();
             decreaseTime();
