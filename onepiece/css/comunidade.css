@@ -121,3 +121,103 @@ body {
 .form-container .form-submit-btn:hover {
   background-color: #313131;
 }
+
+/* Chat */
+.container-chat {
+  display: none;
+  width: 70%;
+  z-index: 99999;
+  padding: 32px 72px;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  border-radius: 8px 8px 0px 0px;
+  background: rgba(0, 0, 0, 0.5);
+  margin: auto;
+}
+
+.cabecalho-chat {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  align-self: stretch;
+}
+
+.cabecalho-chat img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.grupo h2 {
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.grupo p {
+  color: #00b37e;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.chat {
+  overflow-y: auto;
+  width: 100%;
+  height: 50vh;
+}
+
+.username {
+  padding-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.mensagem {
+  display: flex;
+  width: 100%;
+  padding: 14px 24px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 2rem;
+  background: #282843;
+}
+
+.mensagem form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mensagem form input {
+  flex: 1;
+  padding: 0.4rem;
+  background: #282843;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+
+.mensagem form button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (max-width: 1440) {
+  .textos {
+    font-size: 1rem;
+  }
+}
