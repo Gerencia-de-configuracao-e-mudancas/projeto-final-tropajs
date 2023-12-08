@@ -22,8 +22,8 @@ Além de mostrar também sobre as temporadas, enredo e mais sobre a obra, o webs
 Para acessar o site basta acessá-lo por meio do github pages por meio do [link](). Ou apenas clone os arquivos do projeto com o seguinte passo a passo: 
 * Crie uma nova pasta:
 ```
-mkdir novo-diretorio
-cd novo-diretorio
+mkdir nova-pasta
+cd nova-pasta
 ```
 * Clone o projeto:
 ```
