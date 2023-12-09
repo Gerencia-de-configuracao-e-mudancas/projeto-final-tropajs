@@ -1,0 +1,58 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #060707;
+    color: white;
+}
+
+header {
+    padding: 0.5em;
+    background-color: #292033;
+    color: white;
+}
+
+header > h1 {
+    text-align: center;
+}
+
+
+.sessao-apresentacao {
+    padding: 0px 50px;
+    margin: 0px;
+}
+
+.sessao-apresentacao > p {
+    margin: 0px;
+}
+
+.sessao-apresentacao > h3 {
+    color: red;
+    text-shadow: 1px 1px 1px lightgray;
+}
+
+
+.sessao-sobre {
+    padding: 10px 50px;
+    margin: 0px;
+}
+
+.sessao-sobre > p {
+    margin: 0px;
+}
+
+.sessao-sobre > h3 {
+    color: red;
+    text-shadow: 1px 1px 1px lightgray;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 0.5em;
+    background-color: #292033;
+    color: white;
+}
+
+footer > h3 {
+    text-align: center;
+}
