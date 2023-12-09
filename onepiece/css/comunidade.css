@@ -221,3 +221,38 @@ body {
     font-size: 1rem;
   }
 }
+
+.voce {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+  padding-right: 1rem;
+}
+
+.mensagem-voce {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  width: 40%;
+  height: auto;
+  background: #fff;
+  word-wrap: break-word;
+}
+
+.outro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+  padding-left: 1rem;
+}
+
+.mensagem-outro {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  width: 40%;
+  height: auto;
+  background: #333;
+  color: #fff;
+  word-wrap: break-word;
+}
