@@ -19,7 +19,7 @@ Além de mostrar também sobre as temporadas, enredo e mais sobre a obra, o webs
 
 # Como acessar
 
-Para acessar o site basta acessá-lo por meio do github pages por meio do [link](). Ou apenas clone os arquivos do projeto com o seguinte passo a passo: 
+Para acessar o site basta acessá-lo por meio do github pages por meio do [link](https://gerencia-de-configuracao-e-mudancas.github.io/projeto-final-tropajs/). Ou apenas clone os arquivos do projeto com o seguinte passo a passo: 
 * Crie uma nova pasta:
 ```
 mkdir nova-pasta
