@@ -1,9 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/rps_RRg3)
 
 
-# Nome-do-Projeto
+# Animes e CIA
 
-O website "Nome do Projeto" propõe a criação de um site principal que divulgue outros sites de animes, sendo um projeto direcionado para os aficionados por diferentes animes, ou que apenas querem recomendações. Nesse caso, o site principal é direcionado para outros três sites até o momento, dos animes: Jujutsu Kaisen, One Piece e Jojo's Bizarre Adventures. Cada um com seu próprio conteúdo:
+O website Animes e CIA propõe a criação de um site principal que divulgue outros sites de animes, sendo um projeto direcionado para os aficionados por diferentes animes, ou que apenas querem recomendações. Nesse caso, o site principal é direcionado para outros três sites até o momento, dos animes: Jujutsu Kaisen, One Piece e Jojo's Bizarre Adventures. Cada um com seu próprio conteúdo:
 
 ##### Jujutsu Kaisen
 

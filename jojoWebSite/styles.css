@@ -5,6 +5,7 @@
     font-style: italic;
     scroll-behavior: smooth;
     box-sizing: border-box;
+    font-weight: 100;
 }
 
 .header {

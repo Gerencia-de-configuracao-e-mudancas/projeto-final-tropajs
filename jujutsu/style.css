@@ -4,6 +4,7 @@
     margin: 0em;
     padding: 0em;
     font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
 }
 
 body {
