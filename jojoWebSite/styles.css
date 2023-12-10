@@ -1,0 +1,402 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style: italic;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+.header {
+
+    color: white;
+    position: fixed;
+    width: 100%;
+    background-color: red;
+    z-index: 1000;
+    background: linear-gradient(to bottom, black, #141414);
+
+}
+
+.header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    padding: 10px 50px;
+
+}
+
+.header nav img {
+    width: 5rem;
+    height: 3rem;
+}
+
+.header nav ul {
+    display: flex;
+}
+
+.header nav ul li {
+    padding: 1rem;
+    text-decoration: none;
+    list-style: none;
+}
+
+.header nav ul li a {
+    padding: 1rem;
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}
+
+.imgDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+
+    width: 100vw;
+    color: white;
+    height: 100vh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#home {
+    width: 1002vw;
+}
+
+.JojoStyleButton {
+    background-color: #f07bae;
+    background: linear-gradient(to bottom, #f07bae, #fff);
+    /* Substitua as cores conforme necessário */
+    border: 1px solid;
+    font-size: 1.4rem;
+    padding: 10px;
+    box-shadow: 5px 5px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.imgDiv button:hover {
+    box-shadow: 0px 0px;
+}
+
+.imgDiv img {
+    width: 500px;
+    height: 300px;
+}
+
+main {
+    background-color: #141414;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+section {
+    max-width: 1200px;
+}
+
+.title-jojo-theme {
+    display: flex;
+    justify-content: center;
+}
+
+.jojoIconImg{
+    width: 60px;
+    height: 60px;
+}
+
+h1 {
+    font-size: 4rem;
+    padding: 0px 20px;
+    background: linear-gradient(to bottom, #eb2690, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(3px 3px black);
+
+}
+
+
+.history-div {
+    height: 100%;
+}
+
+.container {
+    padding: 4rem;
+    display: flex;
+    justify-content: space-between;
+
+    gap: 10.2rem;
+    color: white;
+}
+
+.topic-paragraph {
+    color: #ed2524;
+    font-size: 2.5rem;
+    font-weight: bolder;
+    -webkit-text-stroke: #fff;
+    -webkit-text-stroke-width: 1px;
+    padding-bottom: 2rem;
+
+}
+
+.content-topic {
+    font-size: 1.3rem;
+    max-width: 40rem;
+    text-align: left;
+}
+
+.img-container {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+#last-container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5rem;
+}
+
+#last-container-p {
+    font-size: 1.3rem;
+    width: 60rem;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.last-container-img {
+    width: auto;
+    height: auto;
+}
+
+.card {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #181818;
+    margin-top: 3rem;
+}
+
+.card-img {
+    width: 50rem;
+    height: 20rem;
+}
+
+.card-paragraph {
+    color: #ed2524;
+    font-size: 2.5rem;
+    font-weight: bolder;
+    -webkit-text-stroke: #fff;
+    -webkit-text-stroke-width: 1px;
+}
+
+.card-content {
+    font-size: 1.3rem;
+    width: 50rem;
+    text-align: left;
+    color: white;
+    padding: 2rem;
+}
+
+#home,
+#historia,
+#temporadas,
+#jogo,
+#sobre {
+    scroll-margin-top: 5rem;
+}
+
+#game-title {
+    padding: 4rem 0rem;
+}
+
+.game-div {
+    display: flex;
+    text-align: left;
+    align-items: center;
+    background-color: #181818;
+    padding: 30px;
+}
+
+.content-game {
+    font-size: 1.3rem;
+    width: 50rem;
+    text-align: left;
+    color: white;
+}
+
+#game-name {
+    padding-bottom: 1rem;
+}
+
+#button-game {
+    margin-top: 2rem;
+}
+
+#button-game:hover {
+    box-shadow: 0px 0px;
+}
+
+#about {
+    padding: 3rem 0rem;
+}
+
+footer {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #181818;
+    color: white;
+    height: 10rem;
+}
+
+.about-div {
+    padding: 30px;
+
+}
+
+.content-about {
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: left;
+    color: white;
+}
+
+#about-sub {
+    padding-bottom: 2rem;
+}
+
+/* css do jogo */
+
+.canvas-div {
+    padding-top: 4rem;
+    position: relative;
+    color: blue;
+    
+}
+
+.interface-div {
+    
+    position: absolute;
+    display: flex;
+    
+    width: 100%;
+    align-items: center;
+    padding: 30px;
+}
+
+#player-bar-container {
+    display: none;
+    justify-content: flex-end;
+    align-items: center;
+    border: 3px solid #f7d62f;
+    background-color: transparent;
+    height: 23px;
+    width: 100%;
+
+}
+
+#player-bar {
+    background: linear-gradient(to bottom, #9651c5, #e894f6);
+    height: 17px;
+    width: 100%;
+}
+
+#timer {
+    background-color: black;
+    border: 5px solid #f7d62f;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transform: rotate(45deg);
+}
+
+#timer-content {
+    
+    transform: rotate(-45deg); /* Invertendo a rotação para compensar */
+}
+
+
+#enemy-bar-container {
+    display: none;
+   
+    align-items: center;
+    border: 3px solid #f7d62f;
+    background-color: transparent;
+    height: 23px;
+    width: 100%;
+}
+
+#enemy-bar {
+    
+    background: linear-gradient(to bottom, #9651c5, #e894f6);
+    height: 17px;
+    width: 100%;
+}
+
+#battle-result {
+    display: flex;
+    flex-direction: column;
+
+    z-index: 100;
+    background-color: red;
+    display: none;
+    position: absolute;
+    color: black;
+    align-items: center;
+    justify-content: center;
+    top: 40%;
+    bottom: 40%;
+    left: 0;
+    right: 0;
+
+    text-align: center;
+    font-size: 2rem;
+    padding: 0px 20px;
+    background: linear-gradient(to bottom, #eb2690, #fff);
+    /* background: linear-gradient(to bottom, #eb2690, #fff);
+    -webkit-background-clip: text; */
+
+    filter: drop-shadow(3px 3px black);
+}
+
+#result{
+    padding: 30px;
+    font-size: larger;
+}
+
+#play-Again {
+    display: none;
+    padding: 2rem;
+    background-color: #f07bae;
+    background: linear-gradient(to bottom, #f07bae, #fff);
+    /* Substitua as cores conforme necessário */
+    border: 1px solid;
+    font-size: 1.4rem;
+    padding: 10px;
+    box-shadow: 5px 5px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.play-Again button:hover {
+    box-shadow: 0px 0px;
+}
