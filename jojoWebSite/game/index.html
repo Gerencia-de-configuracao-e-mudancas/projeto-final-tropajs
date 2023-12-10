@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css" type="text/css">
+    <link rel="icon" href="https://i.redd.it/ujlkbuk1zx341.png" type="image/x-icon">
+    <title>Jojo the bizarre website</title>
+</head>
+
+<body>
+    <header class="header">
+        <nav>
+            <img src="../img/site_principal/jojologo.png" alt="">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="game">
+            <div class="imgDiv">
+                <div class="canvas-div">
+                    
+                    <div class="interface-div">
+                        <div id="player-bar-container">
+                            <div id="player-bar"></div>
+                        </div>
+                        <div id="timer">
+                            <div id="timer-content" style="color: white; z-index: 100;">60</div>
+                        </div>
+                        <div id="enemy-bar-container">
+                            <div id="enemy-bar"></div>
+                        </div>
+                    </div>
+                    <div id="battle-result">
+                        <p id="result">Empate</p> 
+                        <button onclick="location.reload();" id="play-Again">Recomeçar</button>
+                    </div>
+                   
+                    <canvas id="canvas"></canvas>
+                </div> 
+               
+
+            </div>
+        </section>
+        
+        
+
+    </main>
+    <script src="class.js"></script>
+    <script src="script.js" ></script>
+</body>
+
+</html>
