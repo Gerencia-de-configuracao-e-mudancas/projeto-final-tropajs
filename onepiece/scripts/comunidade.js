@@ -100,7 +100,7 @@ const handleLogin = (e) => {
   login.style.display = "none";
   chat.style.display = "flex";
 
-  websocket = new WebSocket("ws://chat-realtime-production.up.railway.app/")
+  websocket = new WebSocket("wss://chat-realtime-production.up.railway.app/")
   websocket.onmessage = processMessage;
 };
 
